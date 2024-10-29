@@ -1,0 +1,3 @@
+[submodule "lectorium-libs-dal"]
+	path = submodules/lectorium-dal
+	url = git@github.com:akdasa-studios/lectorium-dal.git

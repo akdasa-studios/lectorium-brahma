@@ -1,1 +1,1 @@
-# lectorium-brahma
+# Lectorium :: Brahma

@@ -1,0 +1,20 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start Brahma",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "run",
+                "dev"
+            ],
+            "detail": "Starts the Brahma app",
+            "icon": {
+                "id": "run",
+                "color": "terminal.ansiGreen",
+            },
+            "isBackground": true,
+        },
+    ]
+}
