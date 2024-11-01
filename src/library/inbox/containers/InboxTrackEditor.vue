@@ -129,6 +129,7 @@ async function getLocations() {
 async function getTrack(trackId: string) {
   const track = await inboxTracksService.getOne(trackId)
   if (!track.date.normalized) {
+    // @ts-ignore
     track.date.normalized = [undefined, undefined, undefined]
   }
   return track
