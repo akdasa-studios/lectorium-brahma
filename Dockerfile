@@ -15,7 +15,7 @@ COPY . .
 # ---------------------------------------------------------------------------- #
 
 FROM base AS build
-RUN npm run build
+RUN npm run build-only -- --base=/brahma/
 
 # ---------------------------------------------------------------------------- #
 #                                    Release                                   #
@@ -26,7 +26,7 @@ FROM nginx:latest AS release
 LABEL org.opencontainers.image.description="Brahma - admin panel for Lectorium"
 LABEL org.opencontainers.image.source="https://github.com/akdasa-studios/lectorium"
 
-COPY --from=build /akd-stidios/lectorium/apps/brahma /usr/share/nginx/html/brahma
+COPY --from=build /akd-stidios/lectorium/apps/brahma/dist /usr/share/nginx/html/brahma
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
