@@ -23,6 +23,9 @@ RUN npm run build
 
 FROM nginx:latest AS release
 
+LABEL org.opencontainers.image.description="Brahma - admin panel for Lectorium"
+LABEL org.opencontainers.image.source="https://github.com/akdasa-studios/lectorium"
+
 COPY --from=build /akd-stidios/lectorium/apps/brahma /usr/share/nginx/html
 EXPOSE 80
 
