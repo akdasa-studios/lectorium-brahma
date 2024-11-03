@@ -62,6 +62,8 @@ const track = ref<InboxTrack>({
   author: { original: '', normalized: '' },
   location: { original: '', normalized: '' },
   references: [ { original: '', normalized: [] } ],
+  extract_languages: [],
+  translate_into: [],
   status: 'error'
 })
 const errors = ref<Record<string, { text: string; severity: 'warn' | 'error' }[]>>({})
@@ -86,17 +88,12 @@ watch(track, async (value: InboxTrack) => {
 /* -------------------------------------------------------------------------- */
 
 async function onSave() {
-  if (track.value.date.normalized?.every(x => x === undefined)) {
-    track.value.date.normalized = undefined
-  }
-
-  await inboxTracksService.updateOne(track.value._id, track.value)
+  await save()
   visible.value = false
 }
 
 async function onStartProcessing() {
-  track.value.status = 'ready'
-  await inboxTracksService.updateOne(track.value._id, track.value)
+  await save("ready")
   visible.value = false
 }
 
@@ -133,5 +130,19 @@ async function getTrack(trackId: string) {
     track.date.normalized = [undefined, undefined, undefined]
   }
   return track
+}
+
+async function save(
+  newStatus?: "new" | "error" | "ready" | "processing"
+) {
+  if (newStatus) {
+    track.value.status = newStatus
+  }
+
+  if (track.value.date.normalized?.every(x => x === undefined)) {
+    track.value.date.normalized = undefined
+  }
+
+  await inboxTracksService.updateOne(track.value._id, track.value)
 }
 </script>

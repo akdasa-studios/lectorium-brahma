@@ -12,6 +12,22 @@
     <Divider />
 
     <div class="grid gap-6">
+      <LanguageField
+        id="extractLanguages"
+        v-model:value="track.extract_languages"
+        label="Extract languages"
+        :errors="errors.extractLanguage"
+      />
+
+      <LanguageField
+        id="translateInto"
+        v-model:value="track.translate_into"
+        label="Translate into"
+        :errors="errors.translateInto"
+      />
+
+      <Divider />
+
       <TitleField
         v-model:title="track.title.normalized"
         :errors="errors.title"
@@ -73,6 +89,7 @@ import AuthorField from "./Fields/AuthorField.vue"
 import LocationField from "./Fields/LocationField.vue"
 import ReferencesField from "./Fields/ReferencesField.vue"
 import DateField from "./Fields/DateField.vue"
+import LanguageField from "./Fields/LanguageField.vue"
 import { type  InboxTrack } from "@lectorium/dal/models"
 
 /* -------------------------------------------------------------------------- */
@@ -113,7 +130,6 @@ function onSaveClicked() {
 }
 
 function onStartProcessingClicked() {
-  emit('save')
   emit('startProcessing')
 }
 
