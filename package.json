@@ -12,12 +12,12 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@primevue/themes": "^4.0.7",
+    "@primevue/themes": "^4.2.1",
     "@vueuse/core": "^11.1.0",
     "pouchdb": "^9.0.0",
     "pouchdb-find": "^9.0.0",
     "primeicons": "^7.0.0",
-    "primevue": "^4.0.7",
+    "primevue": "^4.2.1",
     "tailwindcss-primeui": "^0.3.4",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3",
