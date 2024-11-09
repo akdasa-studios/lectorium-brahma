@@ -1,7 +1,7 @@
 <template>
   <span
     v-tooltip.top="getAnnotationsText(annotations)"
-    :class="getAnnotationsSeverity(annotations)"
+    :class="[getAnnotationsSeverity(annotations), 'whitespace-nowrap']"
   >
     <slot />
   </span>

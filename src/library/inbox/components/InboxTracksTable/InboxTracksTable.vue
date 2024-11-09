@@ -4,6 +4,8 @@
     paginator
     striped-rows
     data-key="code"
+    show-gridlines
+    removable-sort
     :value="rows"
     :rows="20"
     :rows-per-page-options="[20, 50]"
@@ -22,9 +24,10 @@
 
     <!-- Title Column -->
     <Column
-      field="title"
+      field="title.value"
       header="Title"
-      style="width: 30%"
+      sortable
+      style="width: 50%"
     >
       <template #body="{ data } : { data: InboxTrackRow }">
         <AnnotatedCell :annotations="data.title.annotations">
@@ -35,8 +38,9 @@
 
     <!-- Date Column -->
     <Column
-      field="date"
+      field="date.value"
       header="Date"
+      sortable
       style="width: 10%"
     >
       <template #body="{ data }: { data: InboxTrackRow }">
@@ -48,7 +52,7 @@
 
     <!-- Author Column -->
     <Column
-      field="author"
+      field="author.value"
       header="Author"
       sortable
       style="width: 10%"
@@ -62,9 +66,10 @@
 
     <!-- Location Column -->
     <Column
-      field="location"
+      field="location.value"
       header="Location"
-      style="width: 20%"
+      sortable
+      style="width: 10%"
     >
       <template #body="{ data }">
         <AnnotatedCell :annotations="data.location.annotations">
@@ -77,7 +82,7 @@
     <Column
       field="references"
       header="References"
-      style="width: 20%"
+      style="width: 10%"
     >
       <template #body="{ data } : { data: InboxTrackRow }">
         <AnnotatedCell
@@ -100,6 +105,7 @@
     <Column
       field="status"
       header="Status"
+      sortable
       style="width: 10%"
     >
       <template #body="{ data } : { data: InboxTrackRow }">
