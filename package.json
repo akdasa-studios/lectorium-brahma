@@ -14,14 +14,14 @@
   "dependencies": {
     "@primevue/themes": "^4.2.1",
     "@vueuse/core": "^11.1.0",
+    "events": "^3.3.0",
     "pouchdb": "^9.0.0",
     "pouchdb-find": "^9.0.0",
     "primeicons": "^7.0.0",
     "primevue": "^4.2.1",
     "tailwindcss-primeui": "^0.3.4",
     "vue": "^3.4.29",
-    "vue-router": "^4.3.3",
-    "events": "^3.3.0"
+    "vue-router": "^4.3.3"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",
