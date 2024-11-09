@@ -1,17 +1,14 @@
 <template>
-  <Panel>
-    <InboxTracksTable
-      :rows="inboxTracks"
-      @open="onTrackSelected"
-      @refresh="onRefresh"
-    />
-  </Panel>
+  <InboxTracksTable
+    :rows="inboxTracks"
+    @open="onTrackSelected"
+    @refresh="onRefresh"
+  />
 </template>
 
 
 <script setup lang="ts">
 import { useAsyncState } from "@vueuse/core"
-import Panel from "primevue/panel"
 import {
   InboxTracksTable, type InboxTrackRow, getTitle, getDate,
   getAuthor, getLocation, getReferences
@@ -49,7 +46,14 @@ const { state: inboxTracks, execute } = useAsyncState<InboxTrackRow[]>(
 )
 
 async function loadTableData(): Promise<InboxTrackRow[]> {
-  const inboxTracks = await inboxTracksService.getAll()
+  const inboxTracks = await inboxTracksService.getMany({
+    selector: {
+      $or: [
+        { archived: { "$exists": false } },
+        { archived: false }
+      ]
+    }
+  })
 
   const annotatedInboxTracks: InboxTrackRow[] = []
 
