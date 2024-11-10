@@ -53,7 +53,8 @@ async function loadTableData(): Promise<InboxTrackRow[]> {
           { archived: { "$exists": false } },
           { archived: false }
         ]
-      }
+      },
+      limit: 8192,
     })
 
     const annotatedInboxTracks: InboxTrackRow[] = []
