@@ -46,29 +46,34 @@ const { state: inboxTracks, execute } = useAsyncState<InboxTrackRow[]>(
 )
 
 async function loadTableData(): Promise<InboxTrackRow[]> {
-  const inboxTracks = await inboxTracksService.getMany({
-    selector: {
-      $or: [
-        { archived: { "$exists": false } },
-        { archived: false }
-      ]
-    }
-  })
-
-  const annotatedInboxTracks: InboxTrackRow[] = []
-
-  for (const inboxTrack of inboxTracks) {
-    annotatedInboxTracks.push({
-      id: inboxTrack._id,
-      title: getTitle(inboxTrack.title),
-      date: getDate(inboxTrack.date),
-      author: await getAuthor(authorsService, inboxTrack.author),
-      location: await getLocation(locationsService, inboxTrack.location),
-      references: await getReferences(sourcesService, inboxTrack.references),
-      status: inboxTrack.status,
+  try {
+    const inboxTracks = await inboxTracksService.getMany({
+      selector: {
+        $or: [
+          { archived: { "$exists": false } },
+          { archived: false }
+        ]
+      }
     })
+
+    const annotatedInboxTracks: InboxTrackRow[] = []
+
+    for (const inboxTrack of inboxTracks) {
+      annotatedInboxTracks.push({
+        id: inboxTrack._id,
+        title: getTitle(inboxTrack.title),
+        date: getDate(inboxTrack.date),
+        author: await getAuthor(authorsService, inboxTrack.author),
+        location: await getLocation(locationsService, inboxTrack.location),
+        references: await getReferences(sourcesService, inboxTrack.references),
+        status: inboxTrack.status,
+      })
+    }
+    return annotatedInboxTracks
+  } catch (error) {
+    console.error(error)
+    return []
   }
-  return annotatedInboxTracks
 }
 
 /* -------------------------------------------------------------------------- */
